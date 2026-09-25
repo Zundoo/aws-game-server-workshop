@@ -100,7 +100,10 @@
   {{ $currentFileUniqueID = .UniqueID }}
 {{ end }}
 
-{{ with .sect }}
+{{ $sect := .sect }}
+
+{{ with $sect }}
+
   {{ if and .IsSection (or (not .Params.hidden) $.showhidden) }}
 
     {{ safeHTML .Params.head }}
@@ -124,7 +127,7 @@
         {{ end }}
       </a>
 
-      {{ $numberOfPages := (add (len .Pages) (len .Sections)) }}
+      {{ $numberOfPages := add (len .Pages) (len .Sections) }}
 
       {{ if ne $numberOfPages 0 }}
 
@@ -136,7 +139,7 @@
             {{ $currentNode.Scratch.Set "pages" (.Pages | union .Sections) }}
           {{ end }}
 
-          {{ $pages := ($currentNode.Scratch.Get "pages") }}
+          {{ $pages := $currentNode.Scratch.Get "pages" }}
 
           {{ if eq .Site.Params.ordersectionsby "title" }}
 
@@ -150,7 +153,8 @@
                     dict
                     "sect" .
                     "currentnode" $currentNode
-                    "showvisitedlinks" $showvisitedlinks }}
+                    "showvisitedlinks" $showvisitedlinks
+                }}
 
               {{ end }}
 
@@ -168,7 +172,8 @@
                     dict
                     "sect" .
                     "currentnode" $currentNode
-                    "showvisitedlinks" $showvisitedlinks }}
+                    "showvisitedlinks" $showvisitedlinks
+                }}
 
               {{ end }}
 
