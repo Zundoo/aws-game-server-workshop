@@ -1,46 +1,49 @@
 ---
-title : "Setting up an AWS account"
-date :  "`r Sys.Date()`" 
+title : "Workshop Overview"
+date : "2026-09-25" 
 weight : 1 
 chapter : false
 ---
 
-# Creating your first AWS account
+# AWS REAL-TIME GAME SERVER WORKSHOP
 
-#### Overview
-In this first lab, you will be creating your new **AWS** account and use Multi-factor Authentication (**MFA**) to improve your account security. Next, you will create an **Administrator Group** and **Admin User** to manage access to resources in your account instead of using the root user. \
-Finally, we will step through account authentication with **AWS Support** in the event you experience authentication problems.
+#### Lab Overview
+This workshop focuses on the process of architecting, deploying, and testing a high-concurrency cloud infrastructure tailored for a **Real-time Game Server** operating on persistent **WebSocket** connections. 
 
-#### AWS Account
-**An AWS account** is the basic container for all the AWS resources you can create as an AWS customer. By default, each AWS account will have a _root user_. The _root user_ has full access within your AWS account, and root user permissions cannot be limited. When you first create your AWS account, you will be assessing it as the _root user_.
+The entire framework is engineered and provisioned using the **Amazon Web Services (AWS)** ecosystem combined with containerization practices and in-memory databases to achieve ultra-low latency data propagation, high availability, and smart automated scalability during player surges.
 
-![Create Account](/images/1/0001.png?featherlight=false&width=90pc)
+![Overall AWS Game Server Architecture Diagram](/images/architecture-diagram.png?featherlight=false&width=90pc)
 
-{{% notice note%}}
-As a best practice, do not use the AWS account _root user_ for any task where it's not required. Instead, create a new IAM user for each person that requires administrator access. Thereafter, the users in the administrators user group should set up the user groups, users, and so on, for the AWS account. All future interaction should be through the AWS account's users and their own keys instead of the root user. However, to perform some account and service management tasks, you must log in using the root user credentials.
-{{% /notice%}}
+{{% notice info %}}
+**Security Notice**: The infrastructure applies a 3-Tier Architecture to completely isolate the compute and database layers within **Private Subnets**. The Application Load Balancer (ALB) in the Public Subnet acts as the single secure entry point from the public internet.
+{{% /notice %}}
 
-#### Multi-Factor Authentication (MFA)
-**MFA** adds extra security because it requires users to provide unique authentication from an AWS supported MFA mechanism in addition to their regular sign-in credentials when they access AWS websites or services.
+#### 🛠️ Core AWS Ecosystem Services Utilized
 
-#### IAM User Group 
-An **IAM user group** is a collection of IAM users. User groups let you specify permissions for multiple users, which can make it easier to manage the permissions for those users. Any user in that user group automatically has the permissions that are assigned to the user group. 
+*   **Amazon VPC**: Constructing isolated virtual networks, segmenting subnets, and managing tight security group firewall policies.
+*   **Amazon ECR & Docker**: Containerizing Node.js WebSocket applications and orchestrating secure, centralized private registry management.
+*   **Amazon Elastic Container Service (ECS)**: Orchestrating and maintaining container application runtimes serverlessly via AWS Fargate.
+*   **Application Load Balancer (ALB)**: Unified public entry facade managing automated network protocol upgrades from HTTP to WebSockets.
+*   **Amazon ElastiCache Redis**: Secure In-Memory cache tier (TLS encryption in-transit enabled) syncing game session data across scaling servers.
+*   **Amazon CloudWatch**: Collecting hardware performance counters and managing centralized container log streams.
 
-#### IAM User
-An **IAM user** is an entity that you create in AWS to represent the person or application that uses it to interact with AWS. A user in AWS consists of a name and credentials. \
-Please note that an IAM user with administrator permissions is not the same thing as the AWS account root user.
+#### 💡 Technical Highlights & Production Troubleshooting
 
+1.  **Resolving Redis TLS Connection Hangs**: Learn to fix network timeout issues caused by the *Encryption in-transit* feature by synchronizing the `--tls` flag on the terminal and configuring the source code to use the `rediss://` protocol.
+2.  **Fixing CloudWatch Logs Authorization**: Troubleshoot `AccessDeniedException` by attaching the `CloudWatchAgentServerPolicy` to the IAM Role and configuring the `--log-driver=awslogs` parameter.
+3.  **High-Concurrency Stress Testing**: Utilize Artillery to simulate **1,000 concurrent virtual users** and process **46,500 real-time messages**, successfully verifying the container Auto Scaling policy triggered at a 70% CPU threshold.
 
-#### AWS Support
-AWS Basic Support offers all AWS customers access to our Resource Center, Service Health Dashboard, Product FAQs, Discussion Forums, and Support for Health Checks – at no additional charge. Customers who desire a deeper level of support can subscribe to AWS Support at the Developer, Business, or Enterprise level.
+---
 
-Customers who choose AWS Support gain one-on-one, fast-response support from AWS engineers. The service helps customers use AWS's products and features. With pay-by-the-month pricing and unlimited support cases, customers are freed from long-term commitments. Customers with operational issues or technical questions can contact a team of support engineers and receive predictable response times and personalized support.
+#### 📂 Workshop Implementation Navigation
 
-
-#### Main Content
-
-1. [Creating a new AWS Account](1-create-new-aws-account/)
-2. [Setting up MFA for the AWS Account root user](2-MFA-Setup-For-AWS-User-(root))
-3. [Creating an Administrator Accounts and Groups](3-create-admin-user-and-group/)
-4. [Getting support for Account Authentication](4-verify-new-account/)
-<!-- need to remove parenthesis for path in Hugo 0.88.1 for Windows-->
+1. [4.1. Networking](4-workshop/4.1-networking/)
+2. [4.2. Container](4-workshop/4.2-container/)
+3. [4.3. Database](4-workshop/4.3-database/)
+4. [4.4. Game Server](4-workshop/4.4-game-server/)
+5. [4.5. Load Balancing](4-workshop/4.5-load-balancing/)
+6. [4.6. Scaling](4-workshop/4.6-scaling/)
+7. [4.7. Monitoring](4-workshop/4.7-monitoring/)
+8. [4.8. CI/CD](4-workshop/4.8-cicd/)
+9. [4.9. Load Testing](4-workshop/4.9-load-testing/)
+10. [4.10. Cleanup](4-workshop/4.10-cleanup/)
