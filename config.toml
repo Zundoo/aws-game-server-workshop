@@ -1,48 +1,25 @@
-# Giao diện gốc được sử dụng để xây dựng trang
+# Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
 
-# URL trang web chính thức (Đã sửa chính xác theo tài khoản Zundoo và tên Repo của bạn)
-baseURL = "https://Zundoo.github.io/aws-game-server-workshop/"
-
-# VÔ HIỆU HÓA TAXONOMIES - ĐÂY LÀ LỆNH SỬA TRIỆT ĐỂ LỖI NIL POINTER (invalid memory address)
-disableKinds = ["taxonomy", "taxonomyTerm"]
-
+# For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
 [params]
-  # Giữ giao diện màu cam AWS chuẩn của bài thực hành
+  # Change default color scheme with a variant one. Can be "red", "blue", "green".
   themeVariant = "workshop"
+  # Git hub repo link
   editURL = ""
-  description = "AWS Real-time Game Server Workshop Documentation"
+  description = ""
   author = "journeyoftheaverageguy@gmail.com"
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false
   
 [Languages]
-# Cấu hình Tiếng Việt làm ngôn ngữ hiển thị mặc định khi truy cập (weight = 1)
-[Languages.vi]
-title = "AWS Game Server Workshop"
-weight = 1
-languageName = "Tiếng Việt"
-
-[[Languages.vi.menu.shortcuts]]
-name = "<i class='fab fa-aws'></i> AWS Study Group - Blog"
-identifier = "AWS Study Group"
-url = "http://awsstudygroup.com"
-weight = 20
-
-[[Languages.vi.menu.shortcuts]]
-name = "<i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB"
-identifier = "AWS Study Group FB"
-url = "https://www.facebook.com/groups/awsstudygroupfcj"
-weight = 30
-
-# Cấu hình Tiếng Anh làm ngôn ngữ phụ trợ (weight = 2)
 [Languages.en]
-title = "AWS Game Server Workshop"
-weight = 2
+title = "Create a new AWS account."
+weight = 1
 languageName = "English"
 
 [[Languages.en.menu.shortcuts]]
@@ -55,4 +32,21 @@ weight = 20
 name = "<i class='fab fa-facebook'></i> AWS Study Group - FB Group"
 identifier = "AWS Study Group FB"
 url = "https://www.facebook.com/groups/awsstudygroupfcj"
-weight = 30
+weight = 20
+
+[Languages.vi]
+title = "Tạo mới tài khoản AWS"
+weight = 2
+languageName = "Tiếng Việt"
+
+[[Languages.vi.menu.shortcuts]]
+name = "<i class='fab fa-aws'></i> AWS Study Group - Blog"
+identifier = "AWS Study Group"
+url = "http://awsstudygroup.com"
+weight = 20
+
+[[Languages.vi.menu.shortcuts]]
+name = "<i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB"
+identifier = "AWS Study Group FB"
+url = "https://www.facebook.com/groups/awsstudygroupfcj"
+weight = 20
